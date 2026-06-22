@@ -18,6 +18,8 @@ This repository contains several directories, including:
 - Automatically returns a JSON verdict and incident report
 - Can execute blocking and account-lock actions via system commands
 - Docker-ready deployment
+- Optional Slack notifications in GitHub workflows and Wazuh integration
+- Optional Grafana visualization support for alert dashboards
 
 ## Repository layout
 
@@ -40,6 +42,8 @@ This repository contains several directories, including:
 - Git
 - A valid `GROQ_API_KEY`
 - Optional: Wazuh lab components if you want to integrate with the full environment
+- Optional: GitHub secret `SLACK_WEBHOOK` to enable Slack notifications in the `wazuh-docker` workflows
+- Optional: Grafana for dashboard visualization
 
 ## Setup
 
@@ -79,6 +83,33 @@ Expected response:
 ```json
 {"status":"ok"}
 ```
+
+## Grafana and Slack integration
+
+### Grafana
+
+Grafana is not required for the Flask SOAR agent, but it can be used to visualize Wazuh or SOAR alert data if you deploy it separately.
+
+A simple Grafana container example:
+
+```powershell
+docker run -d --name grafana --network soc-net -p 3000:3000 --restart always -e GF_SECURITY_ADMIN_PASSWORD=admin grafana/grafana:latest
+```
+
+Then open `http://localhost:3000` and configure dashboards.
+
+### Slack
+
+The `wazuh-n8n-lab/wazuh-docker/.github/workflows/` workflows include Slack notification steps using `rtCamp/action-slack-notify@v2`.
+
+To enable those notifications, add a GitHub secret named `SLACK_WEBHOOK` in your repository settings.
+
+The Wazuh lab environment also preserves Slack integration scripts under `wazuh-docker/build-docker-images/wazuh-manager/config/permanent_data.env`, including:
+
+- `/var/ossec/integrations/slack.py`
+- `/var/ossec/active-response/bin/wazuh-slack`
+
+If you want alert notifications or CI messages in Slack, configure the webhook and channel accordingly.
 
 ## API Endpoints
 
