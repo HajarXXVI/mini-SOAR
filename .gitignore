@@ -1,0 +1,38 @@
+# Ignore all environment files
+*.env
+!.env.example
+
+# Python build / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Editor backup / temp files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local IDE / editor settings
+.vscode/
+.idea/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.envrc
+
+# Common logs
+*.log
+
+# Ignore personal shell/home files in this folder
+.bash_history
+.bashrc
+.bash_logout
+.profile
+.ssh/
+.cache/
+.local/
+.docker/
+.sudo_as_admin_successful

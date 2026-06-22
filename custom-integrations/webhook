@@ -1,0 +1,5 @@
+#!/var/ossec/framework/python/bin/python3
+import sys
+import os
+# This is a minimal bridge script
+os.system("/var/ossec/framework/python/bin/python3 /var/ossec/bin/integrations/webhook.py " + " ".join(sys.argv[1:]))

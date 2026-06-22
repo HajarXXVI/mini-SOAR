@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+import requests
+
+# Read the alert file and arguments
+alert_file = sys.argv[1]
+with open(alert_file, 'r') as f:
+    alert_json = json.load(f)
+
+# Your n8n Webhook URL (Replace with your ACTUAL IP, not localhost)
+webhook_url = "http://YOUR_UBUNTU_IP:5678/webhook/your-uuid-here"
+
+# Send the data
+requests.post(webhook_url, json=alert_json)
